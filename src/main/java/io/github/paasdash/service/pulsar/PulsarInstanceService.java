@@ -2,6 +2,7 @@ package io.github.paasdash.service.pulsar;
 
 import io.github.paasdash.module.pulsar.PulsarInstance;
 import io.github.paasdash.util.EnvUtil;
+import io.github.protocol.pulsar.PulsarAdmin;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,6 +13,8 @@ import java.util.Map;
 public class PulsarInstanceService {
 
     private final Map<String, PulsarInstance> pulsarInstanceMap;
+
+    private final Map<String, PulsarAdmin> pulsarAdminMap;
 
     {
         /*
@@ -41,9 +44,23 @@ public class PulsarInstanceService {
                 }
             }
         }
+        pulsarAdminMap = new HashMap<>();
+        for(Map.Entry<String, PulsarInstance> entry : pulsarInstanceMap.entrySet()){
+            String key = entry.getKey();
+            PulsarInstance instance = entry.getValue();
+            pulsarAdminMap.put(entry.getKey(),
+                    PulsarAdmin.builder()
+                    .host(instance.getHost())
+                    .port(instance.getWebPort())
+                    .build());
+        }
     }
 
     public Map<String, PulsarInstance> getPulsarInstanceMap() {
         return pulsarInstanceMap;
+    }
+
+    public final PulsarAdmin getPulsarAdmin(String instance){
+        return pulsarAdminMap.get(instance);
     }
 }

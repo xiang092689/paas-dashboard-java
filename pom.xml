@@ -23,6 +23,7 @@
         <guava.version>31.1-jre</guava.version>
         <jsch.version>0.2.7</jsch.version>
         <kubernetes.version>16.0.1</kubernetes.version>
+        <pulsar-admin.version>0.0.1</pulsar-admin.version>
         <!-- plugin -->
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <checkstyle-plugin.version>3.2.0</checkstyle-plugin.version>
@@ -48,6 +49,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <!-- pulsar -->
+        <dependency>
+            <groupId>io.github.protocol-laboratory</groupId>
+            <artifactId>pulsar-admin-java</artifactId>
+            <version>${pulsar-admin.version}</version>
         </dependency>
         <!-- kubernetes -->
         <dependency>
